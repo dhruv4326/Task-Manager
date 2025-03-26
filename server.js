@@ -9,7 +9,7 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: "*", credentials: true }));
 
 // Database Connection
 mongoose
@@ -67,7 +67,6 @@ app.post("/register", async (req, res) => {
   }
 });
 
-
 // User Login
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -111,3 +110,4 @@ app.get("/", (req, res) => {
 // Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
