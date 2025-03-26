@@ -6,7 +6,8 @@ const router = express.Router();
 //  Get tasks for the logged-in user
 router.get("/", authMiddleware, async (req, res) => {
   try {
-    const tasks = await Task.find({ user: req.user });
+    const mongoose = require("mongoose");
+    const task = new Task({ user: new mongoose.Types.ObjectId(req.user), title, description });
     res.json(tasks);
   } catch (err) {
     res.status(500).json({ error: "Server error" });
@@ -57,3 +58,4 @@ router.delete("/:id", authMiddleware, async (req, res) => {
 });
 
 module.exports = router;
+
